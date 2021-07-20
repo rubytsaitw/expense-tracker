@@ -1,0 +1,22 @@
+{
+  "家居物業": {
+    "value": "家居物業",
+    "icon": "https: //fontawesome.com/icons/home?style=solid"
+  },
+  "交通出行": {
+    "value": "交通出行",
+    "icon": "https: //fontawesome.com/icons/shuttle-van?style=solid"
+  },
+  "休閒娛樂": {
+    "value": "休閒娛樂",
+    "icon": "https: //fontawesome.com/icons/grin-beam?style=solid"
+  },
+  "餐飲食品": {
+    "value": "餐飲食品",
+    "icon": "https: //fontawesome.com/icons/utensils?style=solid"
+  },
+  "其他": {
+    "value": "其他",
+    "icon": "https: //fontawesome.com/icons/pen?style=solid"
+  }
+}

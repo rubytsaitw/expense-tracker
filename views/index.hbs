@@ -1,1 +1,46 @@
-<h2>Hello world! 這是 index</h2>
+{{!-- 修改，刪除 --}}
+
+<div class="container">
+  <div class="d-flex flex-column">
+    {{!-- 類別選單 --}}
+    <div class="search-bar-inner col-md-4 d-flex">
+      <div class="input-group align-items-end">
+        <select class="form-control" name="categorySelect" id="categorySelect" onchange="submit()">
+          <option value="">分類</option>
+          {{#each categoryList}}
+          <option value="{{this.value}}" {{#if (isEqual this.value ../categorySelect )}} selected {{/if}}>
+            {{this.value}}
+          </option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+  </div>
+  <div class="d-flex flex-column">
+    {{!-- 總金額 --}}
+    <div class="row">
+      <div class="col-4 mr-auto">
+        <p>總金額</p>
+      </div>
+      <div class="col-auto">
+        <p>1000</p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-column">
+    {{!-- 個別帳目：類別-項目名稱-日期-金額 --}}
+    <p>個別帳目</p>
+    <ul>
+      {{#each records}}
+      console.log({{ this }})
+      <span>{{ this.name }}</span>
+      <span>{{ this.date }}</span>
+      <span>{{ this.amount }}</span>
+      {{/each}}
+    </ul>
+
+
+  </div>
+
+</div>
