@@ -2,6 +2,8 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const app = express()
 const PORT = 3000
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 const Record = require('./models/record')
 
@@ -15,6 +17,10 @@ app.engine('hbs', exphbs({
   helpers: require('./utils/handlebarsHelpers')
 }))
 app.set('view engine', 'hbs')
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(methodOverride('_method'))
 
 app.use(routes)
 app.use(express.static('public'))

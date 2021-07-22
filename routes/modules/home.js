@@ -17,5 +17,21 @@ router.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
+// filter by category
+router.get('/filter', (req, res) => {
+  const categorySelected = req.query.category
+
+  if (!category) return res.redirect('/')
+
+  return Record.find({ category: categorySelected })
+    .lean()
+    .then(records => {
+      let totalAmount = 0
+      records.forEach(record => totalAmount += record.amount)
+      res.render('index', { records, totalAmount })
+    })
+    .catch(error => console.error(error))
+})
+
 // 匯出路由模組
 module.exports = router
