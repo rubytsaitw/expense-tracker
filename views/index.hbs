@@ -18,7 +18,7 @@
     <!-- display total amount -->
     <div class="total-amount-section m-3 d-flex justify-content-evenly">
       <span class="total-amount-title m-3">總金額：</span>
-      <span class="total-amount m-3">999</span>
+      <span class="total-amount m-3">{{ totalAmount }}</span>
     </div>
 
     <!-- display each record -->
@@ -28,9 +28,10 @@
       <div class="row">
         <!-- category icon -->
         <div class="col col-auto justify-content-center ">
-          {{!-- <a href="/?category={{this.category._id}}" class="">
-            <i class="fas {{this.category.icon}} category-icon"></i>
-          </a> --}}
+          {{!-- <a href="/?category={{this.category._id}}" class=""> --}}
+          <a class="">
+            <i class="fas {{this.icon}} category-icon"></i>
+          </a>
         </div>
 
         <!-- date -->

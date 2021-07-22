@@ -4,14 +4,16 @@ const router = express.Router()
 
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-const categoryList = require('../../config/categoryList')
 
 // 定義首頁路由
 router.get('/', (req, res) => {
   Record.find()
     .lean()
-    .sort({ date: 'asc' })
-    .then(records => res.render('index', { records, categoryList }))
+    .then(records => {
+      let totalAmount = 0
+      records.forEach(record => totalAmount += record.amount)
+      res.render('index', { records, totalAmount })
+    })
     .catch(error => console.error(error))
 })
 

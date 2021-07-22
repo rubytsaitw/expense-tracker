@@ -5,30 +5,35 @@ const records = [
   {
     name: '金色三麥',
     category: '餐飲食品',
+    icon: 'fa-utensils',
     date: '2020-12-09',
     amount: 800
   },
   {
     name: 'THE WANG',
     category: '餐飲食品',
+    icon: 'fa-utensils',
     date: '2021-07-06',
     amount: 2000
   },
   {
     name: '管理費',
     category: '家居物業',
+    icon: 'fa-home',
     date: '2021-07-01',
     amount: 4580
   },
   {
     name: '小琉球潛水教練課程',
     category: '休閒娛樂',
+    icon: 'fa-grin-beam',
     date: '2021-06-03',
     amount: 30000
   },
   {
     name: 'Youtube Premium',
     category: '休閒娛樂',
+    icon: 'fa-grin-beam',
     date: '2020-12-15',
     amount: 399
   }

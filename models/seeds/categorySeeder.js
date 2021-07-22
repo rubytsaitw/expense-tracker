@@ -18,7 +18,6 @@ db.on('error', () => {
 
 db.once('open', () => {
   Category.create(categories)
-    .lean()
     .then(() => {
       db.close()
       console.log('categorySeeder done!')
