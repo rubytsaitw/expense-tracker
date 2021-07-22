@@ -1,0 +1,27 @@
+.filter-category {
+  width: 50%;
+}
+
+.filter-category select {
+  cursor: pointer;
+}
+
+.total-amount-title, .new-page-title, .edit-page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #202832;
+}
+
+.total-amount {
+  font-size: 70px;
+  color: #f97b37;
+}
+
+.fs-7 {
+  font-size: 0.75rem
+}
+
+.bg-orange {
+  background-color: var(--bs-orange);
+}
+

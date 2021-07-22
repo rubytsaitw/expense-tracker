@@ -2,27 +2,15 @@ const Category = require('../category')
 const db = require('../../config/mongoose')
 
 const categories = [
-  {
-    name: '家居物業',
-    icon: 'https://fontawesome.com/icons/home?style=solid'
-  },
-  {
-    name: '交通出行',
-    icon: 'https://fontawesome.com/icons/shuttle-van?style=solid'
-  },
-  {
-    name: '休閒娛樂',
-    icon: 'https://fontawesome.com/icons/grin-beam?style=solid'
-  },
-  {
-    name: '餐飲食品',
-    icon: 'https://fontawesome.com/icons/utensils?style=solid'
-  },
-  {
-    name: '其他',
-    icon: 'https://fontawesome.com/icons/pen?style=solid'
-  },
-]
+  ['家居物業', 'fa-home'],
+  ['交通出行', 'fa-shuttle-van'],
+  ['休閒娛樂', 'fa-grin-beam'],
+  ['餐飲食品', 'fa-utensils'],
+  ['其他', 'fa-pen']
+].map(category => ({
+  title: category[0],
+  icon: category[1]
+}))
 
 db.on('error', () => {
   console.log('mongodb error!')

@@ -1,10 +1,9 @@
-{{!-- 修改，刪除 --}}
-
 <div class="container">
-  <div class="d-flex flex-column">
-    {{!-- 類別選單 --}}
-    <div class="search-bar-inner col-md-4 d-flex">
-      <div class="input-group align-items-end">
+  <div class="d-flex flex-column col-md-9">
+
+    <!-- dropdown -->
+    <form action="/filter" method="GET">
+      <div class="input-group filter-category mb-3 container-fluid">
         <select class="form-control" name="categorySelect" id="categorySelect" onchange="submit()">
           <option value="">分類</option>
           {{#each categoryList}}
@@ -14,33 +13,53 @@
           {{/each}}
         </select>
       </div>
+    </form>
+
+    <!-- display total amount -->
+    <div class="total-amount-section m-3 d-flex justify-content-evenly">
+      <span class="total-amount-title m-3">總金額：</span>
+      <span class="total-amount m-3">999</span>
     </div>
 
-  </div>
-  <div class="d-flex flex-column">
-    {{!-- 總金額 --}}
-    <div class="row">
-      <div class="col-4 mr-auto">
-        <p>總金額</p>
-      </div>
-      <div class="col-auto">
-        <p>1000</p>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex flex-column">
-    {{!-- 個別帳目：類別-項目名稱-日期-金額 --}}
-    <p>個別帳目</p>
-    <ul>
+    <!-- display each record -->
+    <div class="list-group" id="data-panel">
+
       {{#each records}}
-      console.log({{ this }})
-      <span>{{ this.name }}</span>
-      <span>{{ this.date }}</span>
-      <span>{{ this.amount }}</span>
-      {{/each}}
-    </ul>
+      <div class="row">
+        <!-- category icon -->
+        <div class="col col-auto justify-content-center ">
+          {{!-- <a href="/?category={{this.category._id}}" class="">
+            <i class="fas {{this.category.icon}} category-icon"></i>
+          </a> --}}
+        </div>
 
+        <!-- date -->
+        <div class="col">
+          <div>{{this.name}}</div>
+          <div class="fs-7">{{this.date}}</div>
+        </div>
+
+        <!-- amount -->
+        <div class="col col-auto text-end">{{this.amount}}</div>
+
+        <!-- edit/delete button -->
+        <div class="col col-auto">
+          <a href="/records/{{this._id}}/edit" class="btn btn-outline-secondary">修改</a>
+        </div>
+        <div class="col col-auto">
+          <button type="button" class="btn btn-outline-danger btn-delete" data-id="{{this._id}}"
+            data-info="{{this.date}} {{this.name}}" data-bs-toggle="modal" data-bs-target="#deleteModal">刪除</button>
+        </div>
+      </div>
+      {{/each}}
+
+      <div class="row">
+        <div class="col my-3" style="text-align:center">
+          <a href="/records/new">
+            <button type="button" class="col-2 btn bg-orange text-white">新增支出</button>
+          </a>
+        </div>
+      </div>
+    </div>
 
   </div>
-
-</div>

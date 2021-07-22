@@ -9,6 +9,7 @@ const categoryList = require('../../config/categoryList')
 // 定義首頁路由
 router.get('/', (req, res) => {
   Record.find()
+    .lean()
     .sort({ date: 'asc' })
     .then(records => res.render('index', { records, categoryList }))
     .catch(error => console.error(error))
