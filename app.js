@@ -9,12 +9,12 @@ const Record = require('./models/record')
 
 const routes = require('./routes')
 require('./config/mongoose')
-const handlebarsHelpers = require('./utils/handlebarsHelpers')
+const { dateToString } = require('./utils/handlebarsHelpers')
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
-  helpers: require('./utils/handlebarsHelpers')
+  helpers: { dateToString }
 }))
 app.set('view engine', 'hbs')
 
