@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
   const categories = await Category.find().lean()
   const categoryData = {}
   categories.forEach(category => categoryData[category.title] = category.icon)
+  console.log('categoryData:', categoryData)
 
   return Record.find()
     .lean()
@@ -18,6 +19,7 @@ router.get('/', async (req, res) => {
       records.forEach(record => {
         totalAmount += record.amount
         record.icon = categoryData[record.category]
+        console.log(record)
       })
       res.render('index', { categories, records, totalAmount })
     })

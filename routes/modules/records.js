@@ -3,9 +3,11 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
+
 // Create
-router.get('/new', (req, res) => {
-  return res.render('new')
+router.get('/new', async (req, res) => {
+  const categories = await Category.find().lean()
+  return res.render('new', { categories })
 })
 
 router.post('/', (req, res) => {
