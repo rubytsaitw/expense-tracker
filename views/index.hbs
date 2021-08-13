@@ -26,24 +26,21 @@
       <div class="row">
         <!-- category icon -->
         <div class="col col-auto justify-content-center ">
-          {{!-- <a href="/?category={{this.category._id}}" class=""> --}}
-          <a class="">
-            <i class="fas {{this.icon}} category-icon"></i>
-          </a>
+          <i class="fas {{ this.icon }}"></i>
         </div>
 
-        <!-- date -->
-        <div class="col">
-          <div>{{this.name}}</div>
-          <div class="fs-7">{{dateToString this.date}}</div>
+        <!-- name & date -->
+        <div class=" col">
+          <div>{{ this.name }}</div>
+          <div class="fs-7">{{ dateToString this.date }}</div>
         </div>
 
         <!-- amount -->
-        <div class="col col-auto text-end">{{this.amount}}</div>
+        <div class="col col-auto text-end">{{ this.amount }}</div>
 
         <!-- edit/delete button -->
         <div class="col col-auto">
-          <a href="/records/{{this._id}}/edit" class="btn btn-outline-secondary">修改</a>
+          <a href="/records/{{ this._id }}/edit" class="btn btn-outline-secondary">修改</a>
         </div>
         <div class="col col-auto">
           <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">

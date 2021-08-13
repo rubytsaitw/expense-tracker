@@ -6,13 +6,20 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 // 定義首頁路由
-router.get('/', (req, res) => {
-  Record.find()
+router.get('/', async (req, res) => {
+  const categories = await Category.find().lean()
+  const categoryData = {}
+  categories.forEach(category => categoryData[category.title] = category.icon)
+
+  return Record.find()
     .lean()
     .then(records => {
       let totalAmount = 0
-      records.forEach(record => totalAmount += record.amount)
-      res.render('index', { records, totalAmount })
+      records.forEach(record => {
+        totalAmount += record.amount
+        record.icon = categoryData[record.category]
+      })
+      res.render('index', { categories, records, totalAmount })
     })
     .catch(error => console.error(error))
 })
