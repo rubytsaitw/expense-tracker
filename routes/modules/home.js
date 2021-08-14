@@ -25,17 +25,23 @@ router.get('/', async (req, res) => {
 })
 
 // filter by category
-router.get('/filter', (req, res) => {
-  const categorySelected = req.query.category
+router.get('/filter', async (req, res) => {
+  const categories = await Category.find().lean()
+  const categoryData = {}
+  categories.forEach(category => categoryData[category.title] = category.icon)
+  const categorySelected = req.query.categorySelect
 
-  if (!category) return res.redirect('/')
+  if (!categorySelected) return res.redirect('/')
 
   return Record.find({ category: categorySelected })
     .lean()
     .then(records => {
       let totalAmount = 0
-      records.forEach(record => totalAmount += record.amount)
-      res.render('index', { records, totalAmount })
+      records.forEach(record => {
+        totalAmount += record.amount
+        record.icon = categoryData[record.category]
+      })
+      res.render('index', { categories, records, totalAmount, categorySelected })
     })
     .catch(error => console.error(error))
 })

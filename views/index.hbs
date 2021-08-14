@@ -7,7 +7,8 @@
         <select class="form-control" name="categorySelect" id="categorySelect" onchange="submit()">
           <option value="" selected>分類</option>
           {{#each categories}}
-          <option value="{{this.title}}"> {{this.title}} </option>
+          <option {{#is this.title ../categorySelected}} selected {{/is}} value="{{this.title}}"> {{this.title}}
+          </option>
           {{/each}}
         </select>
       </div>
@@ -25,12 +26,12 @@
       {{#each records}}
       <div class="row">
         <!-- category icon -->
-        <div class="col col-auto justify-content-center ">
+        <div class="col col-auto justify-content-center">
           <i class="fas {{ this.icon }}"></i>
         </div>
 
         <!-- name & date -->
-        <div class=" col">
+        <div class="col">
           <div>{{ this.name }}</div>
           <div class="fs-7">{{ dateToString this.date }}</div>
         </div>
@@ -60,5 +61,5 @@
         </div>
       </div>
     </div>
-
   </div>
+</div>

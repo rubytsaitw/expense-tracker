@@ -33,7 +33,8 @@
       <div class="col-md-9">
         <select class="form-control" name="category" id="category">
           {{#each categories}}
-          <option value="{{ this.title }}">{{ this.title }}</option>
+          <option {{#is this.title ../record.category}} selected {{/is}} value="{{ this.title }}">{{ this.title }}
+          </option>
           {{/each}}
         </select>
       </div>
