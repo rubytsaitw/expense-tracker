@@ -23,6 +23,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(methodOverride('_method'))
 
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
+
 app.use(routes)
 app.use(express.static('public'))
 
