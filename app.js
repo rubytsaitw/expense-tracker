@@ -1,12 +1,11 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
+const usePassport = require('./config/passport')
 const app = express()
 const PORT = 3000
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-
-const Record = require('./models/record')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -30,6 +29,7 @@ app.use(session({
   saveUninitialized: true
 }))
 
+usePassport(app)
 app.use(routes)
 app.use(express.static('public'))
 
