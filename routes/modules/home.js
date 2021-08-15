@@ -7,12 +7,14 @@ const Category = require('../../models/category')
 
 // 定義首頁路由
 router.get('/', async (req, res) => {
+  const userId = req.user._id
   const categories = await Category.find().lean()
   const categoryData = {}
   categories.forEach(category => categoryData[category.title] = category.icon)
 
-  return Record.find()
+  return Record.find({ userId })
     .lean()
+    .sort({ _id:'asc' })
     .then(records => {
       let totalAmount = 0
       records.forEach(record => {
@@ -26,6 +28,7 @@ router.get('/', async (req, res) => {
 
 // filter by category
 router.get('/filter', async (req, res) => {
+  const userId = req.user._id
   const categories = await Category.find().lean()
   const categoryData = {}
   categories.forEach(category => categoryData[category.title] = category.icon)
@@ -33,8 +36,9 @@ router.get('/filter', async (req, res) => {
 
   if (!categorySelected) return res.redirect('/')
 
-  return Record.find({ category: categorySelected })
+  return Record.find({ userId, category: categorySelected })
     .lean()
+    .sort({ _id:'asc' })
     .then(records => {
       let totalAmount = 0
       records.forEach(record => {
