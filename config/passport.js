@@ -31,6 +31,6 @@ module.exports = app => {
     User.findById(id)
       .lean()
       .then(user => done(null, user))
-      .catcj(err => done(err, null))
+      .catch(err => done(err, null))
   })
 }
