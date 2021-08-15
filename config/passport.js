@@ -1,5 +1,3 @@
-const express = require('express')
-const router = express.Router()
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
@@ -10,14 +8,19 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
   // 設定本地登入策略
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (req, email, password, done) => {
+    console.log('LocalStrategy runs')
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          return done(null, false, { massage: 'This Email is not registered.' })
+          console.log('!user')
+          return done(null, false, req.flash('warning_msg', 'This email is not registered.'))
+          console.log('req.flash.message:', req.flash)
         }
         if (user.password !== password) {
-          return done(null, false, { massage: 'Incorrect password.' })
+          console.log('!password')
+          return done(null, false, req.flash('warning_msg', 'Incorrect password.'))
+          console.log('req.flash for wrong pwd')
         }
         return done(null, user)
       })
