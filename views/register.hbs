@@ -23,8 +23,11 @@
           <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Password"
             value={{ confirmPassword }}>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
-        {{!-- <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a> --}}
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-info" style="color:white">Register</button>
+          <a href="/auth/facebook" class="btn btn-primary">Facebook Login</a>
+        </div>
+
       </form>
       <p class="lead mt-4">
         Already have an account? <a href="/users/login">Login</a>

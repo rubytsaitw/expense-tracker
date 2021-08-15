@@ -3,8 +3,11 @@ const exphbs = require('express-handlebars')
 const session = require('express-session')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
@@ -25,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
@@ -43,5 +46,5 @@ app.use(routes)
 app.use(express.static('public'))
 
 app.listen(PORT, () => {
-  console.log(`App is running on http://localhost:${PORT}`)
+  console.log(`App is running on http://localhost:${process.env.PORT}`)
 })
