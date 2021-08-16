@@ -1,9 +1,4 @@
 const bcrypt = require('bcryptjs')
-// console.log(process.env.NODE_ENV)
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
 
 const Record = require('../record')
 const User = require('../user')
@@ -26,17 +21,19 @@ const SEED_USERS = [{
 const recordList = [
   {
     id: 1,
-    name: '金色三麥',
+    name: '朋友聚會',
     category: '餐飲食品',
     date: '2020-12-09',
-    amount: 800
+    amount: 800,
+    merchant: '金色三麥'
   },
   {
     id: 2,
-    name: 'THE WANG',
+    name: '情人節晚餐',
     category: '餐飲食品',
     date: '2021-07-06',
-    amount: 2000
+    amount: 2000,
+    merchant: 'THE WANG'
   },
   {
     id: 3,
@@ -50,21 +47,24 @@ const recordList = [
     name: '小琉球潛水教練課程',
     category: '休閒娛樂',
     date: '2021-06-03',
-    amount: 30000
+    amount: 30000,
+    merchant: '蹼客基地'
   },
   {
     id: 5,
     name: 'Youtube Premium',
     category: '休閒娛樂',
     date: '2020-12-15',
-    amount: 399
+    amount: 399,
+    merchant: 'Youtube'
   },
   {
     id: 6,
     name: '程式課程',
     category: '其他',
     date: '2020-05-03',
-    amount: 66000
+    amount: 66000,
+    merchant: 'ALPHA Camp'
   }
 ]
 
@@ -87,7 +87,7 @@ db.once('open', () => {
       })
   }))
     .then(() => {
-      console.log('seeder done.')
+      console.log('Record Seeder done.')
       process.exit()
     })
     .catch(error => console.log(error))
