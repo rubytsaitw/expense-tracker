@@ -65,20 +65,20 @@ router.get('/filter', async (req, res) => {
         // console.log('record[year]', record['year'])
       })
     })
-    .then(records => {
-      await Record.find({ userId, filterCriteria })
-        .lean()
-        .sort({ _id: 'asc' })
-        .then(records => {
-          let totalAmount = 0
-          records.forEach(record => {
-            totalAmount += record.amount
-            record.icon = categoryData[record.category]
-          })
-          res.render('index', { categories, records, totalAmount, categorySelected, yearSelected, monthSelected })
-        })
-        .catch(error => console.error(error))
-    })
+    // .then(records => {
+    //   await Record.find({ userId, filterCriteria })
+    //     .lean()
+    //     .sort({ _id: 'asc' })
+    //     .then(records => {
+    //       let totalAmount = 0
+    //       records.forEach(record => {
+    //         totalAmount += record.amount
+    //         record.icon = categoryData[record.category]
+    //       })
+    //       res.render('index', { categories, records, totalAmount, categorySelected, yearSelected, monthSelected })
+    //     })
+    //     .catch(error => console.error(error))
+    // })
     .catch(error => console.error(error))
 })
 
