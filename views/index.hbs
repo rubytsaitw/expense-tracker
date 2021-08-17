@@ -3,14 +3,42 @@
 
     <!-- dropdown -->
     <form action="/filter" method="GET">
-      <div class="input-group filter-category mb-3 container-fluid">
-        <select class="form-control" name="categorySelect" id="categorySelect" onchange="submit()">
+      <div class="input-group filter-category mb-3 mt-3 container-fluid ">
+        <select class="form-control" name="categorySelect" id="categorySelect">
           <option value="" selected>分類</option>
           {{#each categories}}
           <option {{#is this.title ../categorySelected}} selected {{/is}} value="{{this.title}}"> {{this.title}}
           </option>
           {{/each}}
         </select>
+        <div class="row">
+          <div class="col">
+            <select class="form-control" name="yearSelect" id="yearSelect">
+              <option value="" selected>年份</option>
+              {{#each years}}
+              console.log()
+              <option {{#is this ../yearSelected}} selected {{/is}} value="{{this}}"> {{this}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="col">
+            <select class="form-control" name="monthSelect" id="monthSelect">
+              <option value="" selected>月份</option>
+              {{#each months}}
+              <option {{#is this ../monthSelected}} selected {{/is}} value="{{this}}"> {{this}}
+              </option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="col">
+            <input type="submit" class="btn btn-outline-info" value="篩選">
+          </div>
+        </div>
+      </div>
+    </form>
+    <form action="/filter" method="GET">
+      <div class="input-group filter-category mb-3 container-fluid">
       </div>
     </form>
 

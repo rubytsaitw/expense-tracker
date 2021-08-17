@@ -30,7 +30,8 @@ app.use(methodOverride('_method'))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { _expires: 60000000 }
 }))
 
 usePassport(app)

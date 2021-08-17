@@ -8,5 +8,8 @@ module.exports = {
     const year = String(date.getFullYear())
     const dateArray = [year, month, day]
     return dateArray.join('-')
+  },
+  range: function (start, end) {
+  return Array(end - start + 1).fill().map((_, i) => start + i)
   }
 }
