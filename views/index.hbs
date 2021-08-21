@@ -1,6 +1,9 @@
 <div class="container">
   <div class="d-flex flex-column col-md-9">
-
+    {{!-- partial message for error --}}
+    <div class="row">
+      {{> message}}
+    </div>
     <!-- dropdown -->
     <form action="/filter" method="GET">
       <div class="input-group filter-category mb-3 mt-3 container-fluid ">
@@ -16,8 +19,7 @@
             <select class="form-control" name="yearSelect" id="yearSelect">
               <option value="" selected>年份</option>
               {{#each years}}
-              console.log()
-              <option {{#is this ../yearSelected}} selected {{/is}} value="{{this}}"> {{this}}
+              <option {{#is this ../yearSelected }} selected {{/is}} value="{{this}}"> {{this}}
               </option>
               {{/each}}
             </select>
