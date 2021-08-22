@@ -18,20 +18,20 @@
     </div>
     {{!-- Date --}}
     <div class="form-group row mt-3">
-      <label for="date" class="col-md-3 col-form-label" required>
+      <label for="date" class="col-md-3 col-form-label">
         日期*：
       </label>
       <div class="col-md-9">
-        <input type="date" name="date" class="form-control" id="date">
+        <input type="date" name="date" class="form-control" id="date" required>
       </div>
     </div>
     {{!-- Category --}}
     <div class="form-group row mt-3">
-      <label for="category" class="col-md-3 col-form-label" required>
+      <label for="category" class="col-md-3 col-form-label">
         類別*：
       </label>
       <div class="col-md-9">
-        <select class="form-control" name="category" id="category">
+        <select class="form-control" name="category" id="category" required>
           <option value="" selected>Select</option>
           {{#each categories}}
           <option value="{{ this.title }}">{{ this.title }}</option>
@@ -45,7 +45,7 @@
         金額*：
       </label>
       <div class="col-md-9">
-        <input type="number" name="amount" class="form-control" id="amount" min="0">
+        <input type="number" name="amount" class="form-control" id="amount" min="0" required>
       </div>
     </div>
     {{!-- Merchant --}}

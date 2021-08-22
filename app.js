@@ -13,7 +13,7 @@ const methodOverride = require('method-override')
 
 const routes = require('./routes')
 require('./config/mongoose')
-const helpers = require('handlebars-helpers')();
+const helpers = require('handlebars-helpers')()
 const { dateToString } = require('./utils/handlebarsHelpers')
 
 app.engine('hbs', exphbs({

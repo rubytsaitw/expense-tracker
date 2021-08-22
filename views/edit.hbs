@@ -3,7 +3,7 @@
     <div class="col-md-3 fs-7">*必填欄位</div>
     <div class="col-md-9 text-center">請修改你的支出</div>
   </div>
-  <form action="/records/{{ record._id }}?_method=PUT" method="POST" novalidate>
+  <form action="/records/{{ record._id }}?_method=PUT" method="POST">
     {{!-- Name --}}
     <div class="form-group row mt-4">
       <label for="name" class="col-md-3 col-form-label">
@@ -18,20 +18,20 @@
     </div>
     {{!-- Date --}}
     <div class="form-group row mt-3">
-      <label for="date" class="col-md-3 col-form-label" required>
+      <label for="date" class="col-md-3 col-form-label">
         日期*：
       </label>
       <div class="col-md-9">
-        <input type="date" name="date" class="form-control" id="date" value="{{ dateToString record.date }}">
+        <input type="date" name="date" class="form-control" id="date" value="{{ dateToString record.date }}" required>
       </div>
     </div>
     {{!-- Category --}}
     <div class="form-group row mt-3">
-      <label for="category" class="col-md-3 col-form-label" required>
+      <label for="category" class="col-md-3 col-form-label">
         類別*：
       </label>
       <div class="col-md-9">
-        <select class="form-control" name="category" id="category">
+        <select class="form-control" name="category" id="category" required>
           {{#each categories}}
           <option {{#is this.title ../record.category}} selected {{/is}} value="{{ this.title }}">{{ this.title }}
           </option>
@@ -45,7 +45,8 @@
         金額*：
       </label>
       <div class="col-md-9">
-        <input type="number" name="amount" class="form-control" id="amount" min="0" value="{{ record.amount }}">
+        <input type="number" name="amount" class="form-control" id="amount" min="0" value="{{ record.amount }}"
+          required>
       </div>
     </div>
     {{!-- Merchant --}}

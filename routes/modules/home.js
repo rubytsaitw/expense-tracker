@@ -1,7 +1,7 @@
 // 引用 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
-const { getDaysInMonth, range } = require('../../utils/handlebarsHelpers')
+const { range } = require('../../utils/handlebarsHelpers')
 
 const Record = require('../../models/record')
 const Category = require('../../models/category')
@@ -12,23 +12,30 @@ router.get('/', async (req, res) => {
   // Create Category icon & dropdown
   const categories = await Category.find().lean()
   const categoryData = {}
-  categories.forEach(category => categoryData[category.title] = category.icon)
+  categories.forEach(category => {
+    categoryData[category.title] = category.icon
+    return categories
+  })
 
   // Create Year/Month dropdown
   await Record.find({ userId })
     .lean()
     .sort({ date: 'asc' })
     .then(records => {
-      const months = range(1, 12)
-      const minYear = records[0].date.getFullYear()
-      const maxYear = records[records.length - 1].date.getFullYear()
-      const years = range(minYear, maxYear)
-      let totalAmount = 0
-      records.forEach(record => {
-        totalAmount += record.amount
-        record.icon = categoryData[record.category]
-      })
-      res.render('index', { categories, years, months, records, totalAmount })
+      if (!records.length) {
+        res.render('index')
+      } else {
+        const months = range(1, 12)
+        const minYear = records[0].date.getFullYear()
+        const maxYear = records[records.length - 1].date.getFullYear()
+        const years = range(minYear, maxYear)
+        let totalAmount = 0
+        records.forEach(record => {
+          totalAmount += record.amount
+          record.icon = categoryData[record.category]
+        })
+        res.render('index', { categories, years, months, records, totalAmount })
+      }
     })
     .catch(error => console.error(error))
 })
@@ -40,8 +47,11 @@ router.get('/filter', async (req, res) => {
   // Create Category icon & dropdown
   const categories = await Category.find().lean()
   const categoryData = {}
-  categories.forEach(category => categoryData[category.title] = category.icon)
-  
+  categories.forEach(category => {
+    categoryData[category.title] = category.icon
+    return categories
+  })
+
   // Create Year/Month dropdown
   const allRecords = await Record.find({ userId }).lean().sort({ date: 'asc' })
   const months = range(1, 12)

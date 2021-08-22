@@ -11,10 +11,11 @@ const recordSchema = new Schema({
     required: true
   },
   icon: {
-    type: String,
+    type: String
   },
   date: {
-    type: Date, default: Date.now,
+    type: Date,
+    default: Date.now,
     required: true
   },
   amount: {
@@ -22,7 +23,7 @@ const recordSchema = new Schema({
     required: true
   },
   merchant: {
-    type: String,
+    type: String
   },
   userId: {
     type: Schema.Types.ObjectId,

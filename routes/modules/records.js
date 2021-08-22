@@ -3,7 +3,6 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 
-
 // Create: Get the New page
 router.get('/new', async (req, res) => {
   const categories = await Category.find().lean()
@@ -52,5 +51,4 @@ router.delete('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-module.exports = router 
+module.exports = router
