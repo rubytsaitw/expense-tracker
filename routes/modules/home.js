@@ -28,8 +28,6 @@ router.get('/', async (req, res) => {
         totalAmount += record.amount
         record.icon = categoryData[record.category]
       })
-      console.log('render years:', years)
-      console.log('render months:', months)
       res.render('index', { categories, years, months, records, totalAmount })
     })
     .catch(error => console.error(error))
@@ -43,32 +41,35 @@ router.get('/filter', async (req, res) => {
   const categories = await Category.find().lean()
   const categoryData = {}
   categories.forEach(category => categoryData[category.title] = category.icon)
+  
+  // Create Year/Month dropdown
+  const allRecords = await Record.find({ userId }).lean().sort({ date: 'asc' })
+  const months = range(1, 12)
+  const minYear = allRecords[0].date.getFullYear()
+  const maxYear = allRecords[allRecords.length - 1].date.getFullYear()
+  const years = range(minYear, maxYear)
 
   // filter criteria selected
   const categorySelected = req.query.categorySelect
   const yearSelected = req.query.yearSelect
   const monthSelected = req.query.monthSelect
-  
+
   // error handling
   const errors = []
   if ((yearSelected && !monthSelected) || (!yearSelected && monthSelected)) {
     errors.push({ message: 'Please select both year and month.' })
     return res.render('index', { errors })
   }
-  console.log('catS:', categorySelected)
-  console.log('yearS:', yearSelected)
-  console.log('monthS:', monthSelected)
-  
+
   // filter criteria
   const filterCriteria = { userId: userId }
   categorySelected ? filterCriteria.category = categorySelected : ''
   yearSelected ? filterCriteria.year = Number(yearSelected) : ''
   monthSelected ? filterCriteria.month = Number(monthSelected) : ''
-  console.log(filterCriteria)
-  
+
   // use MongoDB aggregate pipeline (聚合管道)
   await Record.aggregate([
-    { $project: { name: 1, category: 1, date: 1, amount: 1, merchant: 1, userId: 1, year: { $year: '$date' }, month: { $month: '$date' } }},
+    { $project: { name: 1, category: 1, date: 1, amount: 1, merchant: 1, userId: 1, year: { $year: '$date' }, month: { $month: '$date' } } },
     { $match: filterCriteria }
   ])
     .then(records => {
@@ -77,7 +78,7 @@ router.get('/filter', async (req, res) => {
         totalAmount += record.amount
         record.icon = categoryData[record.category]
       })
-      res.render('index', { categories, records, totalAmount, categorySelected, yearSelected, monthSelected })
+      res.render('index', { categories, years, months, records, totalAmount, categorySelected, yearSelected, monthSelected })
     })
     .catch(error => console.error(error))
 })
