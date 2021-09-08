@@ -73,9 +73,9 @@ router.get('/filter', async (req, res) => {
 
   // filter criteria
   const filterCriteria = { userId: userId }
-  categorySelected ? filterCriteria.category = categorySelected : ''
-  yearSelected ? filterCriteria.year = Number(yearSelected) : ''
-  monthSelected ? filterCriteria.month = Number(monthSelected) : ''
+  if (categorySelected) { filterCriteria.category = categorySelected }
+  if (yearSelected) { filterCriteria.year = Number(yearSelected) }
+  if (monthSelected) { filterCriteria.month = Number(monthSelected) }
 
   // use MongoDB aggregate pipeline (聚合管道)
   await Record.aggregate([
